@@ -7,7 +7,7 @@ import com.example.springboot_be.repository.MenuItemRepository;
 import com.example.springboot_be.repository.MenuRepository;
 import com.example.springboot_be.repository.RestaurantRepository;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -17,15 +17,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/restaurant")
 @SecurityRequirement(name = "Keycloak")
+@RequiredArgsConstructor
 public class RestaurantController {
 
-    @Autowired
     RestaurantRepository restaurantRepository;
 
-    @Autowired
     MenuRepository menuRepository;
 
-    @Autowired
     MenuItemRepository menuItemRepository;
 
     @GetMapping
@@ -47,6 +45,7 @@ public class RestaurantController {
     @PostMapping
     // admin can access (admin)
     public Restaurant createRestaurant(Restaurant restaurant) {
+        System.out.println("creat restaurant");
         return restaurantRepository.save(restaurant);
     }
 
